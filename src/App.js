@@ -1,10 +1,13 @@
+//import { logDOM } from '@testing-library/dom'
 import React from 'react'
-import Routes from './config/Routes'
+import Routes from "./config/Routes/index"
 
-const App = () => {
-  return (
-    <Routes />
-  )
+
+const app = () =>{
+    return (
+        //JSK
+        <Routes /> 
+    )
 }
 
-export default App
+export default app;
