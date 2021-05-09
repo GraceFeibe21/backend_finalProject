@@ -1,6 +1,6 @@
 import React, { useState} from 'react'
 import firebase from '../../config/Firebase'
-import {useHistory} from 'react-router-dom'
+import {useHistory, NavLink} from 'react-router-dom'
 
 const Login = ({title, angka}) =>{
     const [welcomeText, setWelcomeText] = useState("Welcome!!");
@@ -32,6 +32,13 @@ const Login = ({title, angka}) =>{
             <br />
             <br />
             <button type="button" onClick={handleSubmit} className="btn btn-primary" >Login</button>
+            <br />
+            <br />
+            <p> Don't have an acoount?
+            <NavLink  activeClassName="active" to="/register">
+                Register Now!
+            </NavLink>
+      </p>
         </div>
     )
 }
