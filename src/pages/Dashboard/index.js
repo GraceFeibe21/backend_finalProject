@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import firebase from '../../config/Firebase'
 import NavBar from '../../components/molecules/NavBar'
+import Footer from '../../components/molecules/Footer';
 
 const Dashboard = () => {
 
-    const [productName, setProductName] = useState ('');
-    const [category, setCatrgory] = useState('');
+    const [bookName, setbookName] = useState ('');
+    const [genre, setGenre] = useState('');
     const [price, setPrice] = useState('');
     const [product, setProduct] = useState ([]);
     const [button, setButton] = useState ("Save");
@@ -29,8 +30,8 @@ const Dashboard = () => {
     }, [])
 
     const resetForm = () => {
-        setProductName('');
-        setCatrgory('');
+        setbookName('');
+        setGenre('');
         setPrice('');
         setButton('Save');
         setSelectedProduct({});
@@ -38,8 +39,8 @@ const Dashboard = () => {
 
     const onSubmit = () => {
         const data = {
-            productName: productName,
-            category: category,
+            bookName: bookName,
+            genre: genre,
             price: price,
         }
         if(button === 'Save'){
@@ -53,8 +54,8 @@ const Dashboard = () => {
     }
 
     const onUpdateData = (item) =>{
-        setProductName(item.productName);
-        setCatrgory(item.category);
+        setbookName(item.bookName);
+        setGenre(item.genre);
         setPrice(item.price);
         setButton("Update");
         setSelectedProduct(item);
@@ -66,16 +67,19 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="container ">
-            <NavBar/>
+        <div className="container">
+            <NavBar />
+            <div className="container mt-5">
             <h3>Dashboard</h3>
             <div className="col-6">
-            <p>Product Name</p>
-            <input className="form-control" placeholder="Type the product name" value={productName} onChange={(e)=>setProductName(e.target.value)} />
-            <p>Category</p>
-            <input className="form-control" placeholder="Type the category" value={category} onChange={(e)=>setCatrgory(e.target.value)} />
+            <p>Book Name</p>
+            <input className="form-control" placeholder="Type the Book Name" value={bookName} onChange={(e)=>setbookName(e.target.value)} />
+            <br />
+            <p>Genre</p>
+            <input className="form-control" placeholder="Type the Genre" value={genre} onChange={(e)=>setGenre(e.target.value)} />
+            <br />
             <p>Price</p>
-            <input className="form-control" placeholder="Type the price" value={price} onChange={(e)=>setPrice(e.target.value)} />
+            <input className="form-control" placeholder="Type the Price" value={price} onChange={(e)=>setPrice(e.target.value)} />
             <br />
             <button className="btn btn-primary" onClick={onSubmit} >{button}</button>
             {
@@ -86,8 +90,8 @@ const Dashboard = () => {
             <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>Product Name</th>
-                    <th>Category</th>
+                    <th>Book Name</th>
+                    <th>Genre</th>
                     <th>Price</th>
                     <th>Action</th>
                 </tr>
@@ -96,8 +100,8 @@ const Dashboard = () => {
                 {
                     product.map(item => (
                         <tr key={item.id}>
-                            <td>{item.productName}</td>
-                            <td>{item.category}</td>
+                            <td>{item.bookName}</td>
+                            <td>{item.genre}</td>
                             <td>{item.price}</td>
                             <td>
                                 <button className="btn btn-success" onClick={() => onUpdateData(item)} >Update</button>
@@ -108,6 +112,8 @@ const Dashboard = () => {
                 }
             </tbody>
             </table>
+        </div>
+        <Footer />
         </div>
     )
 }
